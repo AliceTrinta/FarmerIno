@@ -43,10 +43,10 @@ void loop() {
         umidadeValor = getUmidade();
         j.sendmsg("light("+luzValor+");humidity("+umidadeValor+");temperature("+tempValor+");pH("+phValor+");");
     }
-    if(msg=="ligar"){
+    if(msg=="on"){
         digitalWrite(RELE, LOW); 
     }
-    if(msg=="desligar"){
+    if(msg=="off"){
         digitalWrite(RELE, HIGH);
     }
   }
@@ -55,10 +55,10 @@ void loop() {
 String getLuz(){
   String msg = "";
   if(digitalRead(LDR) == HIGH){ 
-    msg = "luzSem";
+    msg = "noLight";
   }
   else{
-    msg = "luzCom";
+    msg = "withLight";
   }
   return msg;
 }
@@ -66,9 +66,9 @@ String getLuz(){
 String getUmidade(){
   String msg = "";
   int umidade = analogRead(SOLO);
-  if (umidade > 400) msg = "soloSeco";
-  if (umidade < 400 && umidade > 300) msg = "soloUmido";
-  if (umidade < 300) msg = "soloIdeal";
+  if (umidade > 400) msg = "dry";
+  if (umidade < 400 && umidade > 300) msg = "wet";
+  if (umidade < 300) msg = "ideal";
   return msg;
 }
 
